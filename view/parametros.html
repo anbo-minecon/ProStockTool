@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parámetros - Pro Stock Tool</title>
+    <link rel="stylesheet" href="../styles/header-footer.css">
+    <link rel="stylesheet" href="../styles/parametros.css">
+</head>
+<body>
+    <main>
+        <section class="panel-parametros">
+            <div class="header-section">
+                <h2>Parámetros</h2>
+                <div class="header-actions">
+                    <input type="text" id="buscarParametro" class="search-input" placeholder="Buscar parámetros...">
+                    <button id="btnNuevoParametro" class="btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Crear estado
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="tabla-parametros">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Estado</th>
+                            <th>Descripción</th>
+                            <th>Productos</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyParametros"></tbody>
+                </table>
+            </div>
+
+            <div id="alertaNotificacion" class="alerta-notificacion"></div>
+        </section>
+
+        <!-- Modal Crear/Editar -->
+        <div id="modalOverlayParametro" class="modal-overlay" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitleParametro">Nuevo Parámetro</h2>
+                    <button type="button" class="modal-close" id="modalCloseParametro">×</button>
+                </div>
+                <form id="formParametro">
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group" style="grid-column: span 2;">
+                                <label for="paramNombre">Estado<span class="required">*</span></label>
+                                <input type="text" id="paramNombre" class="form-input" maxlength="50" required placeholder="Ej. ACTIVO">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="paramColor">Color</label>
+                                <input type="hidden" id="paramColor" value="#3B82F6">
+                                <div id="paramColorPalette" class="color-palette" aria-label="Selector de color"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="paramDescripcion">Descripción</label>
+                            <textarea id="paramDescripcion" class="form-textarea" maxlength="300" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" id="cancelBtnParametro">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                <polyline points="17 21 17 13 7 13 7 21"/>
+                                <polyline points="7 3 7 8 15 8"/>
+                            </svg>
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Eliminar -->
+        <div id="modalEliminarParametro" class="modal-overlay" aria-hidden="true">
+            <div class="modal-content modal-small">
+                <div class="modal-header modal-header-danger">
+                    <h2>Confirmar Eliminación</h2>
+                    <button type="button" class="modal-close" id="modalEliminarCloseParametro">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-icon-warning">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <p class="modal-message">¿Está seguro de eliminar el parámetro <strong id="parametroNombreEliminar"></strong>?</p>
+                    <p class="modal-submessage">Esta acción no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" id="btnCancelarEliminarParametro">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                        Cancelar
+                    </button>
+                    <button type="button" class="btn-delete" id="btnConfirmarEliminarParametro">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"/>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                            <line x1="10" y1="11" x2="10" y2="17"/>
+                            <line x1="14" y1="11" x2="14" y2="17"/>
+                        </svg>
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../controllers/header-footer.js"></script>
+    <script src="../controllers/parametros.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categorías - Pro Stock Tool</title>
+    <link rel="stylesheet" href="../styles/header-footer.css">
+    <link rel="stylesheet" href="../styles/categorias.css">
+</head>
+<body>
+    <main>
+        <section class="panel-categorias">
+            <div class="botones-top">
+                <button id="btnCategorias" class="activo">Categorías</button>
+                <button id="btnSubcategorias">Subcategorías</button>
+            </div>
+
+            <div class="buscador">
+                <input type="text" id="buscarCategoria" placeholder="Buscar Categorías..." />
+                <button id="btnNuevaCategoria">+ Crear Categoría</button>
+            </div>
+
+            <div id="listaCategorias" class="grid-categorias"></div>
+
+            <!-- Alerta de Notificación -->
+            <div id="alertaNotificacion" class="alerta-notificacion"></div>
+        </section>
+
+        <!-- Modal Nueva Categoría -->
+        <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTitle">Nueva categoría</h2>
+                    <button type="button" class="modal-close" id="modalClose">×</button>
+                </div>
+                <form id="createCategoryForm">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="catName">
+                                Nombre de la categoría<span class="required">*</span>
+                            </label>
+                            <input type="text" id="catName" class="form-input" maxlength="50" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="catDesc">Descripción</label>
+                            <textarea id="catDesc" class="form-textarea" maxlength="200"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Color</label>
+                            <div class="color-swatches">
+                                <div class="swatch selected" data-color="#2e6df6" style="background: #2e6df6;"></div>
+                                <div class="swatch" data-color="#10b981" style="background: #10b981;"></div>
+                                <div class="swatch" data-color="#f59e0b" style="background: #f59e0b;"></div>
+                                <div class="swatch" data-color="#8b5cf6" style="background: #8b5cf6;"></div>
+                                <div class="swatch" data-color="#ef4444" style="background: #ef4444;"></div>
+                                <div class="swatch" data-color="#06b6d4" style="background: #06b6d4;"></div>
+                                <div class="swatch" data-color="#84cc16" style="background: #84cc16;"></div>
+                                <div class="swatch" data-color="#f97316" style="background: #f97316;"></div>
+                                <div class="swatch" data-color="#ec4899" style="background: #ec4899;"></div>
+                                <div class="swatch" data-color="#6366f1" style="background: #6366f1;"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="catEstado">Estado</label>
+                            <select id="catEstado" class="form-select">
+                                <option value="ACTIVO">Activa</option>
+                                <option value="INACTIVO">Inactiva</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-cancel" id="cancelBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                <polyline points="17 21 17 13 7 13 7 21"/>
+                                <polyline points="7 3 7 8 15 8"/>
+                            </svg>
+                            Guardar categoría
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../controllers/header-footer.js"></script>
+    <script src="../controllers/categorias.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#Contenedor-Pagina{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+#Parte-Izquierda{
+    height: 100%;
+    width: 60%;
+    background-color: #3B82F6;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+}
+
+#Contenedor-Texto-Izquierda{
+    margin: auto;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#Contenedor-Texto-Izquierda h2{
+    font-size: 37px;
+    font-weight: 500;
+}
+
+#Contenedor-Texto-Descripcion{
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+position: absolute;
+width: 600px;
+height: 400px;
+bottom: 80px;
+left: 90px;
+}
+
+.Texto-Descripcion{
+    width: 80%;
+}
+
+.Icono{
+    position: absolute;
+    left: -70px;
+    margin-top: 36px;
+    width: 50px;
+    height: 50px;
+}
+
+#Parte-Derecha{
+    height: 100%;
+    width: 40%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#Logo-Pro-Stock{
+    position: absolute;
+    top: 17%;
+    left: 200px;
+    height: 150px;
+    width: 370px;
+}
+
+#Contenedor-IR{
+position: absolute;
+top: 36%;
+left: 160px;
+font-family: sans-serif;
+display: flex;
+flex-direction: column;
+height: 382px;
+width: 450px;
+}
+
+#Contenedor-IR h3{
+text-align: center;
+margin-bottom: 0;
+font-weight: 800
+}
+
+#Contenedor-IR h4{
+text-align: center;
+margin-top: 0;
+}
+
+#Contenedor-Formulario{
+    display: flex;
+    flex-direction: column;
+}
+
+#Contenedor-Formulario input{
+height: 40px;
+border: 2px solid #3B82F6;
+border-radius: 9px;
+outline: none;
+font-size: 18px;
+}
+
+#Contenedor-Formulario label{
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+#email{
+background-image: url('/img/Email.png');
+background-repeat: no-repeat;
+background-position: 5px center;
+padding-left: 55px;
+margin-bottom: 40px;
+}
+
+#Contraseña{
+    background-image: url('/img/Contraseña.png');
+    background-repeat: no-repeat;
+    background-position: 5px center;
+    padding-left: 55px;
+    margin-bottom: 40px;
+}
+
+#Iniciar-Sesion{
+    margin-top: 20px;
+    color: white;
+    font-size: 20px;
+    background-color: #3B82F6;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+#Iniciar-Sesion:hover{
+    background-color: #2563EB;
+    border: 2px solid #2563EB;
+}
+
+#Link-Registro{
+    margin-top: 0;
+}
+
+#Link-Registro a{
+    color: #3B82F6;
+    text-decoration: none;
+}
+
+
+

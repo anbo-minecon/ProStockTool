@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/Style-Registro.css">
+    <title>Registro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+<body>
+    <div class="registro-layout">
+      <div class="registro-brand">
+        <img src="/img/Pro-Stock-Sinfondo.png" alt="Pro Stock Tool" class="logo"/>
+      </div>
+      <div id="Contenedor-Formulario-Registro" role="region" aria-labelledby="titulo-registro">
+        <h3 id="titulo-registro">Crear Cuenta</h3>
+        <h4>Accede a tu cuenta para continuar</h4>
+        <form id="form-registro" novalidate>
+          <div id="Formulario-Registro">
+            <label for="email-Registro">Email</label>
+            <input type="email" name="email" id="email-Registro" placeholder="example@gmail.com" autocomplete="email" required>
+
+            <label for="Nombre-Registro">Nombre</label>
+            <input type="text" name="Nombre" id="Nombre-Registro" placeholder="Juan David" autocomplete="name" required>
+
+            <label for="N-identidad-Registro">N°Identidad</label>
+            <input type="text" name="N-identidad" id="N-identidad-Registro" placeholder="1067623487" inputmode="numeric" required>
+
+            <label for="Contraseña-Registro">Contraseña</label>
+            <div class="password-field">
+              <input type="password" name="Contraseña" id="Contraseña-Registro" placeholder="************************" autocomplete="new-password" required>
+              <button type="button" class="toggle-password" aria-label="Mostrar u ocultar contraseña"></button>
+            </div>
+
+            <button type="submit" id="Crear-Cuenta">Crear Cuenta</button>
+            <p>¿Ya tienes una cuenta?<span><a href="/Inicio-Sesion.html"> Iniciar Sesion</a></span></p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="alerta" id="alerta" role="alert" aria-live="polite" hidden>
+        <button type="button" class="cerrar-alerta-registro" aria-label="Cerrar alerta">X</button>
+        <p id="alerta-mensaje">Te has registrado exitosamente</p>
+    </div>
+
+    <script src="controllers/registro.js"></script>
+</body>
+</html>

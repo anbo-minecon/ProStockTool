@@ -1,0 +1,77 @@
+body{ margin:0; background-color:#E6EFFE; font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:#0f172a; }
+
+.registro-layout{ min-height:100vh; display:grid; grid-template-columns: 1fr; place-items:center; padding:24px }
+.registro-brand{ display:flex; justify-content:center; margin-bottom:16px }
+.registro-brand .logo{ width:160px; height:auto; filter: drop-shadow(0 6px 18px rgba(59,130,246,.25)); }
+
+#Contenedor-Formulario-Registro{
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 10px 30px rgba(2,6,23,.08);
+    font-size: 16px;
+}
+
+#Contenedor-Formulario-Registro h3{ text-align:center; margin: 0 0 6px 0; font-size: 28px; font-weight:700; color:#111827 }
+
+#Contenedor-Formulario-Registro h4{ font-weight:500; text-align:center; margin:0 0 22px 0; color:#6b7280 }
+
+#Formulario-Registro{ display:flex; flex-direction:column; width:100%; gap: 6px }
+
+#Formulario-Registro label{ font-size:14px; font-weight:600; color:#374151; margin-top:8px }
+#Formulario-Registro input{
+    margin-bottom: 12px;
+    height: 44px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 16px;
+    outline: none;
+    padding: 0 12px 0 52px;
+    background-color:#ffffff;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+#Formulario-Registro input:focus{ border-color:#3B82F6; box-shadow: 0 0 0 3px rgba(59,130,246,.15) }
+
+#Crear-Cuenta{
+    height: 44px;
+    background: linear-gradient(135deg, #3B82F6 0%, #2563eb 100%);
+    color: white;
+    font-size: 16px;
+    font-weight:600;
+    border:0;
+    border-radius:10px;
+    transition: all 0.2s ease;
+    box-shadow: 0 8px 20px rgba(59,130,246,.25);
+}
+
+#Crear-Cuenta:hover{ transform: translateY(-1px); box-shadow: 0 12px 28px rgba(59,130,246,.35) }
+
+#Formulario-Registro p{ margin: 4px 0 0 0; font-size:14px; color:#64748b }
+
+#Formulario-Registro a{ text-decoration:none; color:#3B82F6; font-weight:600 }
+
+#email-Registro{ background-image:url('/img/Email.png'); background-repeat:no-repeat; background-position: 14px center; background-size: 22px }
+
+#Nombre-Registro{ background-image:url('/img/Usuario.png'); background-repeat:no-repeat; background-position: 14px center; background-size: 22px }
+
+#N-identidad-Registro{ background-image:url('/img/Identidad.png'); background-repeat:no-repeat; background-position: 14px center; background-size: 22px }
+
+#Contraseña-Registro{ background-image:url('/img/Contraseña.png'); background-repeat:no-repeat; background-position: 14px center; background-size: 22px; padding-right:44px }
+
+.password-field{ position:relative }
+.toggle-password{ position:absolute; right:8px; top:50%; transform:translateY(-50%); width:36px; height:36px; border-radius:8px; border:1px solid #e5e7eb; background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%236b7280" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>') no-repeat center; cursor:pointer }
+.toggle-password.active{ border-color:#3B82F6; background:#fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%233b82f6" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>') no-repeat center }
+
+.alerta{ position: fixed; top: 24px; right: 24px; background: linear-gradient(135deg,#3B82F6 0%, #2563eb 100%); color: white; padding: 14px 16px; border-radius: 12px; box-shadow: 0 8px 22px rgba(59,130,246,.35); animation: aparecer .25s ease; font-size: 15px; display:flex; align-items:center; gap:10px; z-index:2000 }
+.alerta[hidden]{ display:none }
+.cerrar-alerta-registro{ background: rgba(255,255,255,.15); color:#fff; border:0; width:28px; height:28px; border-radius:8px; cursor:pointer }
+
+@keyframes aparecer{
+    from {opacity: 0; transform: translateX(10px);}
+    to{opacity: 1; transform: translateX(0);}
+}
+
+@media(min-width: 900px){ .registro-layout{ grid-template-columns: 1fr } }
