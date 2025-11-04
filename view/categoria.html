@@ -23,7 +23,15 @@
             <div id="listaCategorias" class="grid-categorias"></div>
 
             <!-- Alerta de Notificación -->
-            <div id="alertaNotificacion" class="alerta-notificacion"></div>
+            <div id="alertaNotificacion" 
+                 class="alerta-notificacion"
+                 role="alert"
+                 aria-live="assertive"
+                 aria-atomic="true"
+                 aria-hidden="true">
+                <span class="sr-only">Notificación: </span>
+                <span class="mensaje-notificacion"></span>
+            </div>
         </section>
 
         <!-- Modal Nueva Categoría -->

@@ -14,13 +14,37 @@ const categoryIcon = `
     </svg>
 `;
 
-// Mostrar alerta de notificación
-function showAlerta(msg, type = 'success') {
+// Mostrar alerta de notificación accesible
+function showAlerta(mensaje, tipo = 'info') {
     const alerta = document.getElementById('alertaNotificacion');
-    alerta.textContent = msg;
-    alerta.className = `alerta-notificacion ${type}`;
-    alerta.style.display = 'block';
-    setTimeout(() => alerta.style.display = 'none', 3500);
+    const mensajeElemento = alerta.querySelector('.mensaje-notificacion');
+    
+    // Establecer el mensaje y tipo de notificación
+    mensajeElemento.textContent = mensaje;
+    
+    // Actualizar clases y atributos ARIA
+    alerta.className = 'alerta-notificacion entrada';
+    alerta.classList.add(tipo);
+    alerta.setAttribute('aria-hidden', 'false');
+    
+    // Asegurar que el foco se mueva a la alerta para lectores de pantalla
+    alerta.focus();
+    
+    // Configurar tiempo de visualización (5 segundos para mensajes informativos, 8 para errores)
+    const tiempo = tipo === 'error' ? 8000 : 5000;
+    
+    // Ocultar la alerta después del tiempo especificado
+    setTimeout(() => {
+        alerta.classList.remove('entrada');
+        alerta.classList.add('salida');
+        
+        // Restaurar estado después de la animación
+        setTimeout(() => {
+            alerta.setAttribute('aria-hidden', 'true');
+            alerta.className = 'alerta-notificacion';
+            alerta.removeAttribute('style');
+        }, 300);
+    }, tiempo);
 }
 
 // Abrir modal
