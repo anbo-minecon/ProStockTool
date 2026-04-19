@@ -1,0 +1,37 @@
+# ================================================================
+#  ProStockTool — uploads/.htaccess
+#  Protege la carpeta de subidas:
+#   - Deniega ejecución de PHP (previene RCE por upload malicioso)
+#   - Solo permite imágenes y PDFs
+#   - Deshabilita listado de directorio
+# ================================================================
+
+Options -Indexes -ExecCGI
+Options -MultiViews
+
+# ── Bloquear ejecución de PHP en esta carpeta ─────────────────────
+# Crítico: impide que un archivo .php subido sea ejecutado
+<FilesMatch "\.php[0-9]?$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "(?i)\.(php|php3|php4|php5|php7|php8|phtml|phar|pl|py|asp|aspx|cgi|sh|exe|bat)$">
+    Require all denied
+</FilesMatch>
+
+# ── Solo permitir tipos de archivo seguros ───────────────────────
+<FilesMatch "(?i)\.(jpg|jpeg|png|gif|webp|svg|pdf)$">
+    Require all granted
+</FilesMatch>
+
+# Bloquear todo lo demás
+<FilesMatch "^(?!.*\.(jpg|jpeg|png|gif|webp|pdf)$)">
+    Require all denied
+</FilesMatch>
+
+# ── Forzar tipo MIME correcto (evitar sniffing) ──────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    # Los archivos aquí son estáticos, pueden cachearse
+    Header always set Cache-Control "public, max-age=2592000"
+</IfModule>

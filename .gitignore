@@ -1,0 +1,65 @@
+# ================================================================
+#  ProStockTool — .gitignore
+# ================================================================
+
+# ── Variables de entorno (NUNCA subir al repositorio) ────────────
+.env
+.env.local
+.env.production
+.env.staging
+google4075d6e0c58dfa1b.html
+
+# ── Archivos de sistema operativo ───────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini
+
+# ── Logs ─────────────────────────────────────────────────────────
+*.log
+logs/
+error_log
+
+# ── Dependencias PHP ─────────────────────────────────────────────
+vendor/
+composer.phar
+
+# ── Dependencias Node (si aplica) ────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ── Archivos de base de datos (contienen datos sensibles) ────────
+*.sql
+*.sqlite
+*.db
+
+# ── Uploads de usuarios ──────────────────────────────────────────
+# Subir solo la estructura de carpetas, no los archivos
+uploads/perfil/*.jpg
+uploads/perfil/*.jpeg
+uploads/perfil/*.png
+uploads/perfil/*.gif
+uploads/perfil/*.webp
+
+# ── Archivos de caché y temporales ───────────────────────────────
+*.cache
+*.tmp
+*.temp
+/tmp/
+
+# ── IDEs y editores ──────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Test y archivos de desarrollo ────────────────────────────────
+test-conexion.php
+
+# ── Archivos de build ────────────────────────────────────────────
+/dist/
+/build/

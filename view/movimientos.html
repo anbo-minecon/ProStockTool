@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movimientos</title>
+  <link rel="stylesheet" href="../styles/header-footer.css"/>
+  <link rel="stylesheet" href="../styles/movimientos.css"/>
+  <link rel="stylesheet" href="../styles/bodega-selector.css">
+  <style>
+    /* Tabs Navigation */
+    .tabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0;
+    }
+    
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: #6b7280;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    .tab-btn:hover {
+      background: #f9fafb;
+      color: #374151;
+    }
+    
+    .tab-btn.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+      background: #eff6ff;
+    }
+    
+    .tab-btn svg {
+      flex-shrink: 0;
+    }
+    
+    /* Tab Panels */
+    .tab-panel {
+      display: none;
+    }
+    
+    .tab-panel.active {
+      display: block;
+    }
+    
+    .lote-row {
+      display:grid; grid-template-columns:1fr 130px 130px auto;
+      gap:10px; align-items:end;
+      background:#f8fafc; border:1.5px solid #e5e7eb;
+      border-radius:10px; padding:12px 14px; margin-bottom:8px;
+      transition: border-color .2s;
+    }
+    .lote-row:hover { border-color:#6366f1; }
+    .lote-row .form-group { margin:0; }
+    .lote-row label { font-size:11px; font-weight:600; color:#6b7280; text-transform:uppercase; letter-spacing:.4px; margin-bottom:4px; display:block; }
+    .btn-remove-lote {
+      background:#fee2e2; border:none; border-radius:8px;
+      padding:8px 10px; cursor:pointer; color:#dc2626;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .2s; min-width:36px; height:38px; align-self:end;
+    }
+    .btn-remove-lote:hover { background:#fca5a5; }
+    .lotes-empty { text-align:center; padding:18px; color:#9ca3af; font-size:13px; border:1.5px dashed #d1d5db; border-radius:10px; }
+  </style>
+</head>
+<body>
+
+<main>
+  <div class="container">
+
+    <!-- TABS NAVIGATION -->
+    <div class="tabs-nav">
+      <button class="tab-btn active" data-tab="entrada">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="8 17 12 21 16 17"/><line x1="12" y1="3" x2="12" y2="21"/>
+        </svg>
+        Entradas de Productos
+      </button>
+      <button class="tab-btn" data-tab="salida">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="8 7 12 3 16 7"/><line x1="12" y1="21" x2="12" y2="3"/>
+        </svg>
+        Salidas de Productos
+      </button>
+    </div>
+
+    <!-- TAB ENTRADA -->
+    <div class="tab-panel active" id="tab-entrada">
+      <div class="header-section">
+        <h2>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="8 17 12 21 16 17"/><line x1="12" y1="3" x2="12" y2="21"/>
+          </svg>
+          Entradas de Productos
+        </h2>
+        <div class="header-actions">
+          <button class="btn-primary" id="btnNuevaEntrada">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Nueva Entrada
+          </button>
+        </div>
+      </div>
+      <div class="filters-bar">
+        <div class="search-wrapper">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="text" class="filter-input" id="buscarEntrada" placeholder="Buscar por referencia, tipo o producto…"/>
+        </div>
+        <input type="date" class="filter-input" id="desdeEntrada" title="Fecha desde"/>
+        <input type="date" class="filter-input" id="hastaEntrada" title="Fecha hasta"/>
+        <button class="btn-secondary" id="btnLimpiarEntrada">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.6"/>
+          </svg>
+          Limpiar
+        </button>
+      </div>
+      <div class="table-wrapper">
+        <div class="table-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="results-count">Registros</span>
+            <span class="badge-count" id="countEntrada">0</span>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Referencia</th><th>Tipo</th><th>Proveedor</th>
+                <th>Productos</th><th>Cantidad Total</th><th>Total</th>
+                <th>Estado</th><th>Fecha</th><th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyEntrada">
+              <tr><td colspan="9"><div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg><p>Cargando entradas…</p>
+              </div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB SALIDA -->
+    <div class="tab-panel" id="tab-salida">
+      <div class="header-section">
+        <h2 class="salida-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="8 7 12 3 16 7"/><line x1="12" y1="21" x2="12" y2="3"/>
+          </svg>
+          Salidas de Productos
+        </h2>
+        <div class="header-actions">
+          <button class="btn-primary btn-red" id="btnNuevaSalida">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Nueva Salida
+          </button>
+        </div>
+      </div>
+      <div class="filters-bar">
+        <div class="search-wrapper">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+          <input type="text" class="filter-input" id="buscarSalida" placeholder="Buscar por referencia, tipo o producto…"/>
+        </div>
+        <input type="date" class="filter-input" id="desdeSalida" title="Fecha desde"/>
+        <input type="date" class="filter-input" id="hastaSalida" title="Fecha hasta"/>
+        <button class="btn-secondary" id="btnLimpiarSalida">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.6"/>
+          </svg>
+          Limpiar
+        </button>
+      </div>
+      <div class="table-wrapper">
+        <div class="table-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="results-count">Registros</span>
+            <span class="badge-count" id="countSalida">0</span>
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Referencia</th><th>Tipo</th><th>Cliente / Destino</th>
+                <th>Productos</th><th>Cantidad</th><th>Total</th>
+                <th>Estado</th><th>Fecha</th><th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tbodySalida">
+              <tr><td colspan="9"><div class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg><p>Cargando salidas…</p>
+              </div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+
+<!-- ══ MODAL NUEVA ENTRADA ══ -->
+<div class="modal-overlay" id="modalEntrada">
+  <div class="modal-content" style="max-width:600px;">
+    <div class="modal-header">
+      <h2>Nueva Entrada de Producto</h2>
+      <button class="btn-close" data-close="modalEntrada">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Proveedor</label>
+          <select class="form-control" id="entradaProveedor">
+            <option value="">Seleccionar proveedor</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Referencia <span class="required">*</span></label>
+          <input type="text" class="form-control" id="entradaReferencia" placeholder="PO-2026-001"/>
+        </div>
+        <div class="form-group">
+          <label>Tipo de Entrada</label>
+          <select class="form-control" id="entradaTipo">
+            <option value="Compra">Compra</option>
+            <option value="Devolución de Proveedor">Devolución de Proveedor</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Ajuste de Inventario">Ajuste de Inventario</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Producto <span class="required">*</span></label>
+          <select class="form-control" id="entradaProducto">
+            <option value="">Seleccionar producto</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Cantidad <span class="required">*</span></label>
+          <input type="number" class="form-control" id="entradaCantidad" min="0.001" step="0.001" placeholder="0"/>
+        </div>
+        <div class="form-group">
+          <label>Precio unitario ($)</label>
+          <input type="number" class="form-control" id="entradaPrecio" min="0" step="0.01" value="0" placeholder="0.00"/>
+        </div>
+      </div>
+
+      <div class="summary-box" style="margin-top:12px;">
+        <div class="summary-inner">
+          <div class="summary-row total"><span>Total:</span><span id="sumTotalEntrada">$0.00</span></div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:16px;">
+        <label>Notas</label>
+        <textarea class="form-control" id="entradaNotas" rows="2" placeholder="Observaciones adicionales…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" data-close="modalEntrada">Cancelar</button>
+      <button class="btn-primary" id="btnRegistrarEntrada">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+        </svg>
+        Registrar Entrada
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ MODAL NUEVA SALIDA ══ -->
+<div class="modal-overlay" id="modalSalida">
+  <div class="modal-content" style="max-width:700px;">
+    <div class="modal-header">
+      <h2>Nueva Salida de Productos</h2>
+      <button class="btn-close" data-close="modalSalida">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Cliente / Destino</label>
+          <input type="text" class="form-control" id="salidaCliente" placeholder="Nombre del cliente o destino"/>
+        </div>
+        <div class="form-group">
+          <label>Referencia <span class="required">*</span></label>
+          <input type="text" class="form-control" id="salidaReferencia" placeholder="ADJ-2026-001"/>
+        </div>
+        <div class="form-group" style="grid-column:span 2;">
+          <label>Tipo de Salida</label>
+          <select class="form-control" id="salidaTipo">
+            <option value="Venta">Venta</option>
+            <option value="Ajuste de Inventario">Ajuste de Inventario</option>
+            <option value="Merma">Merma</option>
+            <option value="Devolución a Proveedor">Devolución a Proveedor</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Productos de la salida -->
+      <div class="lotes-section" style="margin-top:14px;">
+        <div class="lotes-header">
+          <h4>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            </svg>
+            Productos a retirar
+          </h4>
+          <button class="btn-primary btn-red" id="btnAgregarProdSalida" style="padding:7px 14px;font-size:13px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Agregar Producto
+          </button>
+        </div>
+        <div id="salidaProductosContainer">
+          <div class="lotes-empty" id="salidaEmpty">
+            No hay productos. Haz clic en "Agregar Producto" para comenzar.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:16px;">
+        <label>Notas</label>
+        <textarea class="form-control" id="salidaNotas" rows="2" placeholder="Observaciones adicionales…"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" data-close="modalSalida">Cancelar</button>
+      <button class="btn-primary btn-red" id="btnRegistrarSalida">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+          <polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+        </svg>
+        Registrar Salida
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ MODAL VER DETALLE ══ -->
+<div class="modal-overlay" id="modalDetalle">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalDetalleTitulo">Detalle del Movimiento</h2>
+      <button class="btn-close" data-close="modalDetalle">✕</button>
+    </div>
+    <div class="modal-body" id="modalDetalleBody"></div>
+    <div class="modal-footer">
+      <button class="btn-secondary" data-close="modalDetalle">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ MODAL CONFIRMAR ══ -->
+<div class="modal-overlay" id="modalConfirmar">
+  <div class="modal-content modal-sm">
+    <div class="modal-header">
+      <h2 id="modalConfirmarTitulo">Confirmar acción</h2>
+      <button class="btn-close" data-close="modalConfirmar">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:30px 24px;">
+      <div class="confirm-icon" id="confirmIcon">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <div class="confirm-title" id="confirmTitle">¿Registrar movimiento?</div>
+      <div class="confirm-text"  id="confirmText">Esta acción actualizará el stock.</div>
+    </div>
+    <div class="modal-footer" style="justify-content:center;gap:14px;">
+      <button class="btn-secondary" data-close="modalConfirmar">Cancelar</button>
+      <button class="btn-primary"   id="btnConfirmarAceptar">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ MODAL ANULAR ══ -->
+<div class="modal-overlay" id="modalAnular">
+  <div class="modal-content modal-sm">
+    <div class="modal-header">
+      <h2>Anular Movimiento</h2>
+      <button class="btn-close" data-close="modalAnular">✕</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:30px 24px;">
+      <div class="confirm-icon danger">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="3 6 5 6 21 6"/>
+          <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+          <path d="M10 11v6"/><path d="M14 11v6"/>
+          <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+        </svg>
+      </div>
+      <div class="confirm-title">¿Anular este movimiento?</div>
+      <div class="confirm-text">El stock será revertido. Esta acción no se puede deshacer.</div>
+      <input type="hidden" id="anularId"/>
+    </div>
+    <div class="modal-footer" style="justify-content:center;gap:14px;">
+      <button class="btn-secondary" data-close="modalAnular">Cancelar</button>
+      <button class="btn-danger"    id="btnConfirmarAnular">Sí, anular</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<script src="../controllers/header-footer.js"></script>
+<script src="../controllers/movimientos.js"></script>
+</body>
+</html>

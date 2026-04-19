@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes y Gráficos - Pro Stock Tool</title>
+    <link rel="stylesheet" href="../styles/header-footer.css">
+    <link rel="stylesheet" href="../styles/reportes.css">
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- jsPDF para exportar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- html2canvas para capturar gráficos -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- SheetJS para exportar Excel -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+    <main>
+        <div class="reportes-container">
+            
+            <!-- Header de Reportes -->
+            <div class="reportes-header">
+                <div class="header-title">
+                    <h1>Reportes y Análisis</h1>
+                    <p>Dashboard de indicadores y estadísticas del inventario</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-secondary" id="btnActualizar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 4 23 10 17 10"/>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                        </svg>
+                        Actualizar
+                    </button>
+                    <button class="btn-primary" id="btnExportarPDF">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="12" y1="18" x2="12" y2="12"/>
+                            <line x1="9" y1="15" x2="15" y2="15"/>
+                        </svg>
+                        Exportar PDF
+                    </button>
+                    <button class="btn-success" id="btnExportarExcel">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <path d="M9 15h6"/>
+                            <path d="M12 12v6"/>
+                        </svg>
+                        Exportar Excel
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filtros-card">
+                <div class="filtro-group">
+                    <label>Período</label>
+                    <select id="filtroPeriodo">
+                        <option value="7">Últimos 7 días</option>
+                        <option value="30" selected>Últimos 30 días</option>
+                        <option value="90">Últimos 90 días</option>
+                        <option value="365">Último año</option>
+                        <option value="custom">Personalizado</option>
+                    </select>
+                </div>
+                <div class="filtro-group" id="customDateRange" style="display: none;">
+                    <label>Desde</label>
+                    <input type="date" id="fechaDesde">
+                </div>
+                <div class="filtro-group" id="customDateRangeTo" style="display: none;">
+                    <label>Hasta</label>
+                    <input type="date" id="fechaHasta">
+                </div>
+                <div class="filtro-group">
+                    <label>Bodega</label>
+                    <select id="filtroBodega">
+                        <option value="">Todas las bodegas</option>
+                    </select>
+                </div>
+                <div class="filtro-group">
+                    <label>Categoría</label>
+                    <select id="filtroCategoria">
+                        <option value="">Todas las categorías</option>
+                    </select>
+                </div>
+                <button class="btn-filter" id="btnAplicarFiltros">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                    </svg>
+                    Aplicar
+                </button>
+            </div>
+
+            <!-- KPIs -->
+            <div class="kpis-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M20 7h-3V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 4h6v3H9V4z"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-label">Total Productos</span>
+                        <span class="kpi-value" id="kpiTotalProductos">0</span>
+                        <span class="kpi-change positive" id="kpiTotalProductosChange">+0%</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-label">Valor Inventario</span>
+                        <span class="kpi-value" id="kpiValorInventario">$0</span>
+                        <span class="kpi-change positive" id="kpiValorInventarioChange">+0%</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-label">Movimientos</span>
+                        <span class="kpi-value" id="kpiMovimientos">0</span>
+                        <span class="kpi-change positive" id="kpiMovimientosChange">+0%</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                    </div>
+                    <div class="kpi-content">
+                        <span class="kpi-label">Stock Bajo</span>
+                        <span class="kpi-value" id="kpiStockBajo">0</span>
+                        <span class="kpi-change negative" id="kpiStockBajoChange">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráficos -->
+            <div class="graficos-grid">
+                
+                <!-- Gráfico 1: Movimientos por Tipo -->
+                <div class="grafico-card">
+                    <div class="grafico-header">
+                        <h3>Movimientos por Tipo</h3>
+                        <button class="btn-icon" onclick="descargarGraficoIndividual('chartMovimientosTipo')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grafico-body">
+                        <canvas id="chartMovimientosTipo"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 2: Productos por Categoría -->
+                <div class="grafico-card">
+                    <div class="grafico-header">
+                        <h3>Productos por Categoría</h3>
+                        <button class="btn-icon" onclick="descargarGraficoIndividual('chartProductosCategoria')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grafico-body">
+                        <canvas id="chartProductosCategoria"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 3: Evolución del Inventario -->
+                <div class="grafico-card grafico-full">
+                    <div class="grafico-header">
+                        <h3>Evolución del Inventario</h3>
+                        <button class="btn-icon" onclick="descargarGraficoIndividual('chartEvolucionInventario')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grafico-body">
+                        <canvas id="chartEvolucionInventario"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 4: Stock por Bodega -->
+                <div class="grafico-card">
+                    <div class="grafico-header">
+                        <h3>Stock por Bodega</h3>
+                        <button class="btn-icon" onclick="descargarGraficoIndividual('chartStockBodega')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grafico-body">
+                        <canvas id="chartStockBodega"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 5: Top Productos -->
+                <div class="grafico-card">
+                    <div class="grafico-header">
+                        <h3>Top 10 Productos por Movimiento</h3>
+                        <button class="btn-icon" onclick="descargarGraficoIndividual('chartTopProductos')">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="grafico-body">
+                        <canvas id="chartTopProductos"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Tabla de Reportes -->
+            <div class="tabla-reportes">
+                <div class="tabla-header">
+                    <h3>Reporte Detallado de Productos</h3>
+                    <div class="tabla-actions">
+                        <input type="text" class="search-table" id="buscarTabla" placeholder="Buscar en tabla...">
+                    </div>
+                </div>
+                <div class="tabla-wrapper">
+                    <table id="tablaReportes">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Bodega</th>
+                                <th>Stock Actual</th>
+                                <th>Stock Min</th>
+                                <th>Stock Max</th>
+                                <th>Precio</th>
+                                <th>Valor Total</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaReportesBody">
+                            <tr>
+                                <td colspan="10" class="text-center">Cargando datos...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tabla-pagination">
+                    <span id="paginacionInfo">Mostrando 0 de 0 registros</span>
+                    <div class="pagination-controls">
+                        <button id="btnPrevPage" disabled>Anterior</button>
+                        <span id="currentPage">1</span>
+                        <button id="btnNextPage" disabled>Siguiente</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../controllers/header-footer.js"></script>
+    <script src="../controllers/reportes.js"></script>
+</body>
+</html>

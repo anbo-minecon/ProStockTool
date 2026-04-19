@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Usuarios — Pro Stock Tool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/header-footer.css">
+  <link rel="stylesheet" href="../styles/global.css">
+  <link rel="stylesheet" href="../styles/usuarios.css">
+</head>
+<body>
+<main>
+<div class="usr-wrapper">
+
+  <!-- ══ CABECERA ══ -->
+  <div class="usr-topbar">
+    <div class="usr-topbar-left">
+      <div class="usr-title-chip">ADMIN</div>
+      <div>
+        <h1 class="usr-title">Gestión de Usuarios</h1>
+        <p class="usr-subtitle">Crea, edita y administra roles del equipo</p>
+      </div>
+    </div>
+    <div class="usr-topbar-right">
+      <div class="usr-search-wrap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="buscarUsuario" class="usr-search" placeholder="Buscar usuario...">
+      </div>
+      <button id="btnAgregarUsuario" class="usr-btn-new">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/><line x1="19" y1="8" x2="23" y2="8"/><line x1="21" y1="6" x2="21" y2="10"/></svg>
+        Nuevo Usuario
+      </button>
+    </div>
+  </div>
+
+  <!-- ══ STATS ══ -->
+  <div class="usr-stats">
+    <div class="usr-stat-card" id="statTotal">
+      <div class="usr-stat-bg"></div>
+      <div class="usr-stat-icon usr-stat-icon--blue">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div>
+        <div class="usr-stat-num" id="numTotal">—</div>
+        <div class="usr-stat-lbl">Total usuarios</div>
+      </div>
+    </div>
+    <div class="usr-stat-card">
+      <div class="usr-stat-bg"></div>
+      <div class="usr-stat-icon usr-stat-icon--amber">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div>
+        <div class="usr-stat-num" id="numAdmin">—</div>
+        <div class="usr-stat-lbl">Administradores</div>
+      </div>
+    </div>
+    <div class="usr-stat-card">
+      <div class="usr-stat-bg"></div>
+      <div class="usr-stat-icon usr-stat-icon--teal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div>
+        <div class="usr-stat-num" id="numJefe">—</div>
+        <div class="usr-stat-lbl">Jefes de Bodega</div>
+      </div>
+    </div>
+    <div class="usr-stat-card">
+      <div class="usr-stat-bg"></div>
+      <div class="usr-stat-icon usr-stat-icon--violet">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div>
+        <div class="usr-stat-num" id="numTendero">—</div>
+        <div class="usr-stat-lbl">Tenderos</div>
+      </div>
+    </div>
+    <div class="usr-stat-card">
+      <div class="usr-stat-bg"></div>
+      <div class="usr-stat-icon usr-stat-icon--green">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <div>
+        <div class="usr-stat-num" id="numActivo">—</div>
+        <div class="usr-stat-lbl">Activos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TABLA ══ -->
+  <div class="usr-table-card">
+    <div class="usr-table-head">
+      <div class="usr-table-filters">
+        <button class="usr-filter-btn active" data-filter="todos">Todos</button>
+        <button class="usr-filter-btn" data-filter="admin">Admin</button>
+        <button class="usr-filter-btn" data-filter="jefe_bodega">Jefe Bodega</button>
+        <button class="usr-filter-btn" data-filter="tendero">Tendero</button>
+      </div>
+      <div id="usr-count" class="usr-table-count"></div>
+    </div>
+    <div class="usr-table-scroll">
+      <table class="usr-table">
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Identidad</th>
+            <th>Rol</th>
+            <th>Bodega</th>
+            <th>Estado</th>
+            <th>Fecha creación</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="listaUsuarios">
+          <tr><td colspan="7" style="text-align:center;padding:48px">
+            <div class="usr-spinner-wrap"><span class="usr-spinner"></span> Cargando usuarios...</div>
+          </td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<!-- ══ MODAL CREAR / EDITAR ══ -->
+<div class="usr-modal-overlay" id="modalUsuario" aria-hidden="true">
+  <div class="usr-modal">
+    <div class="usr-modal-header">
+      <div>
+        <div class="usr-modal-tag" id="modalTag">NUEVO</div>
+        <h2 class="usr-modal-title" id="modalUsuarioTitle">Nuevo Usuario</h2>
+      </div>
+      <button class="usr-modal-close" id="modalUsuarioClose">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="usr-modal-body">
+      <form id="formUsuario" autocomplete="off">
+
+        <div class="usr-form-row">
+          <div class="usr-form-group">
+            <label class="usr-label">Nombre completo <span class="req">*</span></label>
+            <input type="text" id="usuarioNombre" class="usr-input" placeholder="Ej: Carlos Mendoza" required>
+          </div>
+          <div class="usr-form-group">
+            <label class="usr-label">Email <span class="req">*</span></label>
+            <input type="email" id="usuarioEmail" class="usr-input" placeholder="usuario@empresa.com" required>
+          </div>
+        </div>
+
+        <div class="usr-form-row">
+          <div class="usr-form-group">
+            <label class="usr-label">Cédula / Identidad <span class="req">*</span></label>
+            <input type="text" id="usuarioIdentidad" class="usr-input" placeholder="Número de identificación" required>
+          </div>
+          <div class="usr-form-group" id="grupoPassword">
+            <label class="usr-label">Contraseña <span class="req" id="passReq">*</span></label>
+            <div class="usr-pass-wrap">
+              <input type="password" id="usuarioPassword" class="usr-input" placeholder="Mínimo 8 caracteres">
+              <button type="button" class="usr-pass-toggle" id="btnTogglePass">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="eyeIcon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+            <small class="usr-hint" id="passHint">Deja vacío para mantener la actual (en edición)</small>
+          </div>
+        </div>
+
+        <div class="usr-form-row">
+          <div class="usr-form-group">
+            <label class="usr-label">Rol <span class="req">*</span></label>
+            <div class="usr-select-wrap">
+              <select id="usuarioRol" class="usr-select" required>
+                <option value="">Seleccionar...</option>
+                <option value="admin">⭐ Administrador</option>
+                <option value="jefe_bodega">🏭 Jefe de Bodega</option>
+                <option value="tendero">👤 Tendero</option>
+              </select>
+            </div>
+          </div>
+          <div class="usr-form-group">
+            <label class="usr-label">Estado <span class="req">*</span></label>
+            <div class="usr-select-wrap">
+              <select id="usuarioEstado" class="usr-select" required>
+                <option value="activo">✓ Activo</option>
+                <option value="inactivo">⏸ Inactivo</option>
+                <option value="suspendido">⛔ Suspendido</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bodega — visible solo para jefe_bodega -->
+        <div class="usr-form-group" id="grupoBodega" style="display:none">
+          <label class="usr-label">Bodega asignada <span class="req">*</span></label>
+          <div class="usr-select-wrap">
+            <select id="usuarioBodega" class="usr-select">
+              <option value="">Seleccionar bodega...</option>
+            </select>
+          </div>
+          <small class="usr-hint">Requerido para Jefes de Bodega</small>
+        </div>
+
+      </form>
+    </div>
+    <div class="usr-modal-footer">
+      <button class="usr-btn-cancel" id="btnCancelarUsuario">Cancelar</button>
+      <button class="usr-btn-save" id="btnGuardarUsuario">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Guardar Usuario
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL ELIMINAR ══ -->
+<div class="usr-modal-overlay" id="modalEliminar" aria-hidden="true">
+  <div class="usr-modal usr-modal--sm">
+    <div class="usr-modal-header usr-modal-header--danger">
+      <div>
+        <div class="usr-modal-tag" style="background:rgba(255,255,255,.15);color:#fff">ATENCIÓN</div>
+        <h2 class="usr-modal-title" style="color:#fff">Eliminar Usuario</h2>
+      </div>
+      <button class="usr-modal-close" id="modalEliminarClose" style="background:rgba(255,255,255,.12);color:#fff">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="usr-modal-body" style="text-align:center;padding:32px 28px">
+      <div class="usr-warn-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <p class="usr-warn-msg" id="confirmEliminarMsg">¿Eliminar este usuario?</p>
+      <p class="usr-warn-sub">Esta acción es permanente y no se puede deshacer.</p>
+    </div>
+    <div class="usr-modal-footer">
+      <button class="usr-btn-cancel" id="btnCancelarEliminar">Cancelar</button>
+      <button class="usr-btn-delete" id="btnConfirmarEliminar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg>
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="../controllers/header-footer.js"></script>
+<script src="../controllers/permisos.js"></script>
+<script src="../controllers/usuarios.js"></script>
+</body>
+</html>

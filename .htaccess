@@ -1,0 +1,26 @@
+# ================================================================
+#  ProStockTool — database/.htaccess
+#  IMPORTANTE: Sin mod_rewrite — InfinityFree redirige a 404
+#  con RewriteEngine en subcarpetas.
+#  Solo usamos FilesMatch y Options que son 100% compatibles.
+# ================================================================
+
+# Evitar listado de archivos
+Options -Indexes -MultiViews
+
+# Bloquear archivos que nunca deben ser accesibles directamente
+<FilesMatch "^(conexion|verificar_rol|cors|test-conexion)\.php$">
+    Require all denied
+</FilesMatch>
+
+# Bloquear archivos sensibles por extensión
+<FilesMatch "(?i)\.(sql|env|log|md|json|lock|sh|bak|ini)$">
+    Require all denied
+</FilesMatch>
+
+# Cabeceras de seguridad
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header always set Pragma "no-cache"
+</IfModule>

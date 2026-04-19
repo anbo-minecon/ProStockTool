@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos - Pro Stock Tool</title>
+    <link rel="stylesheet" href="../styles/header-footer.css">
+    <link rel="stylesheet" href="../styles/producto.css">
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/bodega-selector.css">
+</head>
+<body>
+    <main>
+        <div class="container">
+            <!-- ==================== HEADER ==================== -->
+            <div class="header-section">
+                <h1>Gestión de Productos</h1>
+                <div class="header-actions">
+                    <button id="btnFiltros" class="btn-filter">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                        </svg>
+                        Filtros
+                    </button>
+                    <button id="btnCrearProducto" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Nuevo Producto
+                    </button>
+                </div>
+            </div>
+
+            <!-- ==================== TABLA DE PRODUCTOS ==================== -->
+            <div class="table-wrapper">
+                <div class="table-header">
+                    <div class="table-info">
+                        <span class="results-count" id="resultsCount">Cargando...</span>
+                        <span class="badge-count" id="badgeCount">0</span>
+                    </div>
+                    <div class="table-actions">
+                        <button class="btn-icon-action" title="Exportar a Excel">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                            <!-- botón reiniciar filtros -->
+                            <button id="btnResetFilters" class="btn-icon-action" title="Reiniciar filtros">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="23 4 23 10 17 10"/>
+                                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36"/>
+                                </svg>
+                            </button>
+                        <button class="btn-icon-action" title="Imprimir">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 6 2 18 2 18 9"/>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                                <rect x="6" y="14" width="12" height="8"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table id="tablaProductos" class="table">
+                        <thead>
+                            <tr>
+                                <th class="sortable" data-column="nombre">Producto</th>
+                                <th>U-medida</th>
+                                <th>NIT</th>
+                                <th>Bodega</th>
+                                <th>Categoría</th>
+                                <th>Subcategoría</th>
+                                <th class="sortable" data-column="stock">Stock</th>
+                                <th class="sortable" data-column="precio">Precio</th>
+                                <th>Vencimiento</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ==================== MODAL FILTROS ==================== -->
+            <div id="modalFiltros" class="modal-overlay filters-modal" aria-hidden="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Filtros Avanzados</h2>
+                        <button type="button" class="btn-close" onclick="cerrarModalFiltros()">×</button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <div class="filters-grid" style="grid-column: 1 / -1;">
+                            <div class="form-group">
+                                <label for="filtroNombre">Buscar Producto</label>
+                                <input type="text" id="filtroNombre" placeholder="Nombre del producto...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filtroProveedor">Proveedor</label>
+                                <select id="filtroProveedor">
+                                    <option value="">Todos los proveedores</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filtroBodega">Bodega</label>
+                                <select id="filtroBodega">
+                                    <option value="">Todas las bodegas</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filtroCategoria">Categoría</label>
+                                <select id="filtroCategoria">
+                                    <option value="">Todas las categorías</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filtroEstado">Estado</label>
+                                <select id="filtroEstado">
+                                    <option value="">Todos los estados</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filtroStockMin">Stock Mínimo</label>
+                                <input type="number" id="filtroStockMin" placeholder="0" min="0" step="0.01">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="filtroStockMax">Stock Máximo</label>
+                                <input type="number" id="filtroStockMax" placeholder="∞" min="0" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" onclick="limpiarFiltros()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"/>
+                                <line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                            Limpiar Filtros
+                        </button>
+                        <button type="button" class="btn-primary" onclick="aplicarYCerrarFiltros()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            Aplicar Filtros
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== MODAL CREAR/EDITAR PRODUCTO ==================== -->
+            <div id="modalProducto" class="modal-overlay" aria-hidden="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalTitulo">Crear Producto</h2>
+                        <button type="button" class="btn-close" onclick="cerrarModal()">×</button>
+                    </div>
+                    
+                    <form id="formProducto">
+                        <input type="hidden" id="productoId">
+                        
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="productoNombre">Nombre del Producto *</label>
+                                <input type="text" id="productoNombre" required placeholder="Ej: Martillo de Garra">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoProveedor">Proveedor</label>
+                                <select id="productoProveedor">
+                                    <option value="">Seleccionar proveedor...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoUnidad">Unidad de Medida</label>
+                                <input type="text" id="productoUnidad" placeholder="Ej: Unidad, Kg, Lt">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoNit">NIT</label>
+                                <input type="text" id="productoNit" placeholder="Código NIT">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoBodega">Bodega</label>
+                                <select id="productoBodega">
+                                    <option value="">Seleccionar bodega...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoCategoria">Categoría</label>
+                                <select id="productoCategoria">
+                                    <option value="">Seleccionar categoría...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoSubcategoria">Subcategoría</label>
+                                <select id="productoSubcategoria">
+                                    <option value="">Seleccionar subcategoría...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoStock">Stock Actual</label>
+                                <input type="number" id="productoStock" step="0.01" value="0" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoStockMin">Stock Mínimo</label>
+                                <input type="number" id="productoStockMin" step="0.01" value="0" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoStockMax">Stock Máximo</label>
+                                <input type="number" id="productoStockMax" step="0.01" value="0" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoPrecio">Precio</label>
+                                <input type="number" id="productoPrecio" step="0.01" value="0" min="0">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoFechaVenc">Fecha Vencimiento</label>
+                                <input type="date" id="productoFechaVenc">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="productoEstado">Estado</label>
+                                <select id="productoEstado">
+                                    <option value="">Seleccionar estado...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn-secondary" onclick="cerrarModal()">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/>
+                                    <line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn-primary">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                    <polyline points="17 21 17 13 7 13 7 21"/>
+                                    <polyline points="7 3 7 8 15 8"/>
+                                </svg>
+                                Guardar Producto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../controllers/notifications.js"></script>
+    <script src="../controllers/header-footer.js"></script>
+    <!-- Scripts de contexto de bodega (se cargan solo para jefe_bodega) -->
+    <script src="../controllers/bodega-context.js"></script>
+    <script src="../controllers/bodega-selector.js"></script>
+    <script src="../controllers/producto.js"></script>
+</body>
+</html>

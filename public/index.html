@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProStockTool — Sistema de Inventario para Ferreterías</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="landing.css" />
+  <link rel="icon" href="icon/logo2.png" type="image/png" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="icon/logo2.png" alt="ProStockTool logo" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+        <div class="nav-logo-mark nav-logo-fallback" style="display:none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+          </svg>
+        </div>
+        <span>ProStockTool</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#about">Nosotros</a>
+        <a href="#features">Funciones</a>
+        <a href="#mision-vision">Misión &amp; Visión</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#footer">Documentación</a>
+        <a href="../login.html" class="nav-cta">Ingresar al sistema</a>
+      </nav>
+      <button class="nav-burger" id="navBurger" aria-label="Menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-noise"></div>
+      <div class="hero-grid"></div>
+      <div class="hero-orb hero-orb--1"></div>
+      <div class="hero-orb hero-orb--2"></div>
+      <div class="hero-orb hero-orb--3"></div>
+    </div>
+
+    <div class="container hero-inner">
+      <!-- Left: copy -->
+      <div class="hero-copy">
+        <div class="hero-badge reveal-up" style="--d:0ms">
+          <span class="badge-dot"></span>
+          Sistema activo · SENA Colombia
+        </div>
+        <h1 class="hero-heading reveal-up" style="--d:80ms">
+          Inventario sin<br>
+          <span class="hero-heading-accent">caos.</span><br>
+          Stock con<br>
+          <span class="hero-heading-accent2">trazabilidad.</span>
+        </h1>
+        <p class="hero-sub reveal-up" style="--d:180ms">
+          ProStockTool centraliza bodegas, productos, movimientos y roles 
+          en un solo lugar — diseñado para el ritmo real de una ferretería.
+        </p>
+        <div class="hero-actions reveal-up" style="--d:260ms">
+          <a href="../login.html" class="btn-primary">
+            Acceder al sistema
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#about" class="btn-ghost">
+            Conocer más
+          </a>
+        </div>
+        <div class="hero-stats reveal-up" style="--d:340ms">
+          <div class="hero-stat">
+            <strong>+3,500</strong>
+            <span>Productos</span>
+          </div>
+          <div class="hero-stat-sep"></div>
+          <div class="hero-stat">
+            <strong>Multi</strong>
+            <span>Bodegas</span>
+          </div>
+          <div class="hero-stat-sep"></div>
+          <div class="hero-stat">
+            <strong>3</strong>
+            <span>Niveles de rol</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: dashboard mockup -->
+      <div class="hero-visual reveal-up" style="--d:120ms" aria-hidden="true">
+      <img src="icon/landing.png" alt="Mockup del dashboard del sistema" class="hero-mockup" onerror="this.style.display='none';" />
+
+        <!-- Floating chips -->
+        <div class="float-chip float-chip--1">
+          <div class="chip-icon chip-icon--green">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="chip-val">+50 uds.</div>
+            <div class="chip-lbl">Entrada registrada</div>
+          </div>
+        </div>
+        <div class="float-chip float-chip--2">
+          <div class="chip-icon chip-icon--blue">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="chip-val">v14 guardada</div>
+            <div class="chip-lbl">Trazabilidad activa</div>
+          </div>
+        </div>
+        <div class="float-chip float-chip--3">
+          <div class="chip-icon chip-icon--amber">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="chip-val">7 alertas</div>
+            <div class="chip-lbl">Stock bajo mínimo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-indicator"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-eyebrow reveal-up">¿Qué es ProStockTool?</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2 class="section-heading reveal-up">
+            Un sistema construido para el mundo real de la ferretería
+          </h2>
+          <p class="body-text reveal-up">
+            ProStockTool nació con un propósito concreto: resolver los problemas 
+            cotidianos de inventario en ferreterías, donde la cantidad de referencias, 
+            el flujo de productos y la administración de bodegas exigen una herramienta 
+            ágil y confiable.
+          </p>
+          <p class="body-text reveal-up">
+            El sistema centraliza la gestión de productos, categorías, proveedores,
+            transferencias entre bodegas y movimientos de inventario. Cada usuario
+            tiene un rol definido con permisos específicos que garantizan la integridad 
+            de la información.
+          </p>
+          <div class="about-features reveal-up">
+            <div class="about-feature">
+              <div class="feature-icon feature-icon--blue">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Gestión de bodegas</strong>
+                <span>Organización por espacios físicos con responsables asignados</span>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="feature-icon feature-icon--cyan">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Movimientos en tiempo real</strong>
+                <span>Entradas, salidas, devoluciones y transferencias registradas</span>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="feature-icon feature-icon--indigo">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Control por roles</strong>
+                <span>Administradores, jefes de bodega y tenderos con accesos distintos</span>
+              </div>
+            </div>
+            <div class="about-feature">
+              <div class="feature-icon feature-icon--amber">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/>
+                  <line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Reportes y estadísticas</strong>
+                <span>Visibilidad clara del inventario y sus tendencias</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-visual reveal-up" style="--d:100ms">
+          <div class="visual-card-stack">
+            <div class="vcard vcard--back"></div>
+            <div class="vcard vcard--mid">
+              <div class="vcard-row"><div class="vl w60"></div><div class="vl w30"></div></div>
+              <div class="vcard-row"><div class="vl w80"></div><div class="vtag vtag--blue"></div></div>
+              <div class="vcard-row"><div class="vl w50"></div><div class="vtag vtag--green"></div></div>
+              <div class="vcard-row"><div class="vl w70"></div><div class="vtag vtag--amber"></div></div>
+            </div>
+            <div class="vcard vcard--front">
+              <div class="vcard-header">
+                <div class="vcard-title">Última transferencia</div>
+                <div class="vcard-time">Hace 3 min</div>
+              </div>
+              <div class="vcard-move">
+                <div class="vcard-bodega">
+                  <div class="vbodega-icon">B1</div>
+                  <span>Bodega Principal</span>
+                </div>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <div class="vcard-bodega">
+                  <div class="vbodega-icon vbodega-icon--2">B2</div>
+                  <span>Sucursal Norte</span>
+                </div>
+              </div>
+              <div class="vcard-product">
+                <span class="vcard-product-name">Tornillos hexagonales 1/2"</span>
+                <span class="vcard-product-qty">× 200 uds.</span>
+              </div>
+              <div class="vcard-footer">
+                <span class="vstatus vstatus--ok">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  Completado
+                </span>
+                <span class="vcard-user">por J. Pérez</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FEATURES (Bento)
+  ============================================================ -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-eyebrow reveal-up" style="color:var(--blue-400);">Funcionalidades clave</div>
+      <h2 class="section-heading section-heading--white reveal-up">Todo lo que necesitas,<br>nada que no uses.</h2>
+      <p class="section-desc reveal-up">Diseñado específicamente para ferreterías colombianas con gestión multi-bodega.</p>
+
+      <div class="bento-grid reveal-up" style="--d:100ms">
+
+        <div class="bento-card bento-card--wide bento-card--blue">
+          <div class="bento-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <h3>Trazabilidad completa de movimientos</h3>
+          <p>Cada entrada, salida, devolución o transferencia queda registrada con fecha, usuario y justificación — sin excepciones.</p>
+          <div class="bento-pill">Tiempo real</div>
+        </div>
+
+        <div class="bento-card bento-card--dark">
+          <div class="bento-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+            </svg>
+          </div>
+          <h3>Múltiples bodegas</h3>
+          <p>Organiza tu inventario por espacios físicos, asigna responsables y controla transferencias entre sucursales.</p>
+        </div>
+
+        <div class="bento-card bento-card--glass">
+          <div class="bento-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3>Roles diferenciados</h3>
+          <p>Administrador, jefe de bodega y tendero — cada uno con permisos exactos para su función.</p>
+        </div>
+
+        <div class="bento-card bento-card--tall bento-card--dark">
+          <div class="bento-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <line x1="3" y1="9" x2="21" y2="9"/>
+              <line x1="3" y1="15" x2="21" y2="15"/>
+              <line x1="9" y1="3" x2="9" y2="21"/>
+            </svg>
+          </div>
+          <h3>Reportes y estadísticas</h3>
+          <p>Visualiza el comportamiento del stock, identifica tendencias y exporta reportes con un solo clic.</p>
+          <div class="bento-chart-mini">
+            <div class="bcm-bar" style="--bh:40%"></div>
+            <div class="bcm-bar" style="--bh:70%"></div>
+            <div class="bcm-bar" style="--bh:55%"></div>
+            <div class="bcm-bar" style="--bh:85%"></div>
+            <div class="bcm-bar bcm-bar--hi" style="--bh:95%"></div>
+            <div class="bcm-bar" style="--bh:65%"></div>
+          </div>
+        </div>
+
+        <div class="bento-card bento-card--glass">
+          <div class="bento-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+          </div>
+          <h3>Búsqueda instantánea</h3>
+          <p>Localiza cualquier producto o movimiento en segundos por nombre, código, categoría o proveedor.</p>
+        </div>
+
+        <div class="bento-card bento-card--wide bento-card--glass">
+          <div class="bento-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <h3>Alertas de stock bajo</h3>
+          <p>Define umbrales mínimos por producto y recibe alertas automáticas antes de quedarte sin existencias.</p>
+          <div class="bento-pill bento-pill--amber">Configurable por producto</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MISIÓN & VISIÓN
+  ============================================================ -->
+  <section class="mv-section" id="mision-vision">
+    <div class="container">
+      <div class="section-eyebrow reveal-up">Propósito del proyecto</div>
+      <h2 class="section-heading reveal-up">Misión &amp; Visión</h2>
+      <div class="mv-grid">
+        <div class="mv-card mv-card--mision reveal-up">
+          <div class="mv-card-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="6"/>
+              <circle cx="12" cy="12" r="2"/>
+            </svg>
+          </div>
+          <div class="mv-card-label">Misión</div>
+          <h3>Digitalizar la gestión de ferreterías</h3>
+          <p>Proveer a las ferreterías colombianas una herramienta tecnológica accesible, confiable y escalable que les permita administrar su inventario de manera eficiente, reduciendo pérdidas y mejorando la toma de decisiones operativas.</p>
+        </div>
+        <div class="mv-card mv-card--vision reveal-up" style="--d:100ms">
+          <div class="mv-card-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <div class="mv-card-label">Visión</div>
+          <h3>Referente de innovación en el sector</h3>
+          <p>Convertirnos en la plataforma de referencia para la gestión de inventario de pequeñas y medianas ferreterías en Colombia, evolucionando hacia una solución integral de administración comercial con inteligencia de negocio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EQUIPO
+  ============================================================ -->
+  <section class="equipo-section" id="equipo">
+    <div class="container">
+      <div class="section-eyebrow reveal-up" style="color:var(--blue-400)">Nuestro equipo</div>
+      <h2 class="section-heading section-heading--white reveal-up">El equipo detrás del sistema</h2>
+      <p class="section-desc section-desc--dark reveal-up">
+        Cuatro desarrolladores SENA que construyeron ProStockTool de principio a fin.
+      </p>
+
+      <div class="equipo-grid">
+
+        <div class="team-card reveal-up" style="--d:0ms">
+          <div class="team-card-inner">
+            <div class="team-avatar team-avatar--1">
+              <img src="icon/logo2.png" alt="" class="team-avatar-logo" onerror="this.style.display='none';" />
+              <span>JP</span>
+            </div>
+            <div class="team-badge">Full Stack Developer</div>
+            <h3 class="team-name">Adanies Basilio</h3>
+            <span class="team-role">Arquitecto de Software &amp; Dev Full Stack</span>
+            <div class="team-contact">
+              <a href="mailto:adaniesbasilio@gmail.com" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                adaniesbasilio@gmail.com
+              </a>
+              <a href="tel:+573001234001" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.1 6.1l1.07-1.07a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +57 300 123 4001
+              </a>
+            </div>
+            <div class="team-socials">
+              <a href="#" class="social-btn social-btn--gh" title="GitHub" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+              <a href="#" class="social-btn social-btn--li" title="LinkedIn" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+              <a href="https://wa.me/573001234001" class="social-btn social-btn--wa" title="WhatsApp" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card reveal-up" style="--d:80ms">
+          <div class="team-card-inner">
+            <div class="team-avatar team-avatar--2"><span>OB</span></div>
+            <div class="team-badge">Backend</div>
+            <h3 class="team-name">KannerTapia</h3>
+            <span class="team-role">Analista &amp; Desarrollador Backend</span>
+            <div class="team-contact">
+              <a href="mailto:kannertapia@gmail.com" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                kannertapia@gmail.com
+              </a>
+              <a href="tel:+573001234002" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.1 6.1l1.07-1.07a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +57 300 123 4002
+              </a>
+            </div>
+            <div class="team-socials">
+              <a href="#" class="social-btn social-btn--gh" title="GitHub" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+              <a href="#" class="social-btn social-btn--li" title="LinkedIn" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+              <a href="https://wa.me/573001234002" class="social-btn social-btn--wa" title="WhatsApp" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card reveal-up" style="--d:160ms">
+          <div class="team-card-inner">
+            <div class="team-avatar team-avatar--3"><span>AB</span></div>
+            <div class="team-badge">UI/UX</div>
+            <h3 class="team-name">Emanuel Martinez</h3>
+            <span class="team-role">Diseñador UI/UX &amp; Frontend</span>
+            <div class="team-contact">
+              <a href="mailto:emanuelMartinez@gmail.com" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                emanuelMartinez@gmail.com
+              </a>
+              <a href="tel:+573001234003" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.1 6.1l1.07-1.07a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +57 300 123 4003
+              </a>
+            </div>
+            <div class="team-socials">
+              <a href="#" class="social-btn social-btn--gh" title="GitHub" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+              <a href="#" class="social-btn social-btn--li" title="LinkedIn" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+              <a href="https://wa.me/573001234003" class="social-btn social-btn--wa" title="WhatsApp" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card reveal-up" style="--d:240ms">
+          <div class="team-card-inner">
+            <div class="team-avatar team-avatar--4"><span>EM</span></div>
+            <div class="team-badge">Lider del proyecto</div>
+            <h3 class="team-name">Omel Tapia</h3>
+            <span class="team-role">Arquitecto de Base de Datos</span>
+            <div class="team-contact">
+              <a href="mailto:omel.tapia@gmail.com" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                omel.tapia@gmail.com
+              </a>
+              <a href="tel:+573001234004" class="team-contact-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.1 6.1l1.07-1.07a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +57 300 123 4004
+              </a>
+            </div>
+            <div class="team-socials">
+              <a href="#" class="social-btn social-btn--gh" title="GitHub" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+              <a href="#" class="social-btn social-btn--li" title="LinkedIn" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+              <a href="https://wa.me/573001234004" class="social-btn social-btn--wa" title="WhatsApp" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA BAND
+  ============================================================ -->
+  <section class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="container cta-inner reveal-up">
+      <div class="cta-logo">
+        <img src="icon/logo2.png" alt="" onerror="this.style.display='none';" />
+      </div>
+      <div class="cta-text">
+        <h2>¿Listo para organizar tu ferretería?</h2>
+        <p>Accede al panel y toma el control de tu inventario desde hoy mismo.</p>
+      </div>
+      <a href="../login.html" class="btn-cta">
+        Ingresar al sistema
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="icon/logo2.png" alt="ProStockTool" class="footer-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="footer-logo-fallback nav-logo-mark" style="display:none">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <span>ProStockTool</span>
+          </div>
+          <p class="footer-brand-desc">Sistema de gestión de inventario desarrollado para ferreterías colombianas. Organización, control y trazabilidad en un solo sistema.</p>
+          <p class="footer-copy-inline">© 2025 ProStockTool · Proyecto académico SENA.</p>
+        </div>
+
+        <div class="footer-docs">
+          <h4 class="footer-col-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Documentación
+          </h4>
+          <div class="footer-docs-grid">
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Requerimientos</a>
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Manual de usuario</a>
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Calidad</a>
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/></svg>Diagramas</a>
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Casos de uso</a>
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>Base de datos</a>
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>Arquitectura</a>
+            <a href="#" class="doc-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Plan de pruebas</a>
+          </div>
+        </div>
+
+        <div class="footer-nav-col">
+          <h4 class="footer-col-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            Navegación
+          </h4>
+          <ul class="footer-nav-list">
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#about">¿Qué es ProStockTool?</a></li>
+            <li><a href="#features">Funciones</a></li>
+            <li><a href="#mision-vision">Misión &amp; Visión</a></li>
+            <li><a href="#equipo">Equipo</a></li>
+            <li><a href="../login.html" class="footer-cta-link">Acceder al sistema →</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 ProStockTool · Proyecto de formación profesional · SENA Colombia</p>
+        <p>Desarrollado con fines académicos. Todos los datos son de ejemplo.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="landing.js"></script>
+</body>
+</html>

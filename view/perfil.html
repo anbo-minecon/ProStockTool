@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Pro Stock Tool</title>
+    <link rel="stylesheet" href="../styles/header-footer.css">
+    <link rel="stylesheet" href="../styles/perfil.css">
+    <!-- Cropper.js styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" />
+</head>
+<body>
+    <main>
+        <div class="perfil-container">
+            
+            <!-- Header del Perfil -->
+            <div class="perfil-header">
+                <div class="header-title">
+                    <h1>Mi Perfil</h1>
+                    <p>Administra tu información personal y configuración de cuenta</p>
+                </div>
+            </div>
+
+            <!-- Tarjetas del perfil -->
+            <div class="perfil-grid">
+                
+                <!-- Tarjeta de Foto y Datos Básicos -->
+                <div class="perfil-card card-foto">
+                    <div class="card-body text-center">
+                        <div class="foto-perfil-wrapper">
+                            <div class="foto-perfil" id="fotoPerfil">
+                                <span id="inicialesFoto"></span>
+                                <img id="imagenPerfil" src="" alt="Foto de perfil" style="display: none;">
+                            </div>
+                            <button class="btn-cambiar-foto" id="btnCambiarFoto" title="Cambiar foto">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                                    <circle cx="12" cy="13" r="4"/>
+                                </svg>
+                            </button>
+                            <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                        </div>
+                        <h2 class="nombre-usuario" id="nombreUsuario"></h2>
+                        <p class="rol-usuario" id="rolUsuario"></p>
+                        <p class="email-usuario" id="emailUsuario"></p>
+                        
+                        <div class="info-adicional">
+                            <div class="info-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                                <span>Miembro desde: <strong id="fechaCreacion"></strong></span>
+                            </div>
+                            <div class="info-item">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                                <span>Último acceso: <strong id="ultimoAcceso"></strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Información Personal -->
+                <div class="perfil-card card-info">
+                    <div class="card-header">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            Información Personal
+                        </h3>
+                        <button class="btn-editar" id="btnEditarInfo">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                            Editar
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form id="formInfoPersonal">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Nombre completo</label>
+                                    <input type="text" id="inputNombre" name="nombre" disabled>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="inputEmail" name="email" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Documento de identidad</label>
+                                    <input type="text" id="inputIdentidad" name="identidad" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Teléfono</label>
+                                    <input type="tel" id="inputTelefono" name="telefono" placeholder="Ej: 3001234567" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label>Rol</label>
+                                    <input type="text" id="inputRol" name="rol" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label>Dirección</label>
+                                    <textarea id="inputDireccion" name="direccion" rows="2" placeholder="Dirección completa" disabled></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-actions" style="display: none;">
+                                <button type="button" class="btn-secondary" id="btnCancelarInfo">Cancelar</button>
+                                <button type="submit" class="btn-primary">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"/>
+                                    </svg>
+                                    Guardar Cambios
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Seguridad -->
+                <div class="perfil-card card-seguridad">
+                    <div class="card-header">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            Seguridad
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="formCambiarPassword">
+                            <div class="form-group">
+                                <label>Contraseña actual</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="inputPasswordActual" name="password_actual" placeholder="Ingresa tu contraseña actual" required>
+                                    <button type="button" class="toggle-password" onclick="togglePassword('inputPasswordActual')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                            <circle cx="12" cy="12" r="3"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nueva contraseña</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="inputPasswordNueva" name="password_nueva" placeholder="Mínimo 8 caracteres" required>
+                                    <button type="button" class="toggle-password" onclick="togglePassword('inputPasswordNueva')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                            <circle cx="12" cy="12" r="3"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="password-strength" id="passwordStrength"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Confirmar nueva contraseña</label>
+                                <div class="password-input-wrapper">
+                                    <input type="password" id="inputPasswordConfirmar" name="password_confirmar" placeholder="Repite la nueva contraseña" required>
+                                    <button type="button" class="toggle-password" onclick="togglePassword('inputPasswordConfirmar')">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                            <circle cx="12" cy="12" r="3"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-primary full-width">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2a10 10 0 0 0-9.95 9h11.64L9.74 7.05a1 1 0 0 1 1.41-1.41l5.66 5.65a1 1 0 0 1 0 1.42l-5.66 5.65a1 1 0 0 1-1.41 0 1 1 0 0 1 0-1.41L13.69 13H2.05A10 10 0 1 0 12 2z"/>
+                                </svg>
+                                Cambiar Contraseña
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Actividad Reciente -->
+                <div class="perfil-card card-actividad">
+                    <div class="card-header">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                            </svg>
+                            Actividad Reciente
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="actividad-lista" id="actividadLista">
+                            <div class="actividad-item">
+                                <div class="actividad-icono" style="background: #D1FAE5; color: #059669;">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                </div>
+                                <div class="actividad-content">
+                                    <p class="actividad-titulo">Cargando actividad...</p>
+                                    <span class="actividad-fecha">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta de Estadísticas -->
+                <div class="perfil-card card-estadisticas">
+                    <div class="card-header">
+                        <h3>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="20" x2="18" y2="10"/>
+                                <line x1="12" y1="20" x2="12" y2="4"/>
+                                <line x1="6" y1="20" x2="6" y2="14"/>
+                            </svg>
+                            Mis Estadísticas
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="estadisticas-grid">
+                            <div class="estadistica-item">
+                                <span class="estadistica-valor" id="estatSesiones">0</span>
+                                <span class="estadistica-label">Sesiones Iniciadas</span>
+                            </div>
+                            <div class="estadistica-item">
+                                <span class="estadistica-valor" id="estatAcciones">0</span>
+                                <span class="estadistica-label">Acciones Realizadas</span>
+                            </div>
+                            <div class="estadistica-item">
+                                <span class="estadistica-valor" id="estatDias">0</span>
+                                <span class="estadistica-label">Días en el Sistema</span>
+                            </div>
+                            <div class="estadistica-item">
+                                <span class="estadistica-valor" id="estatEstado">
+                                    <span class="badge badge-success">Activo</span>
+                                </span>
+                                <span class="estadistica-label">Estado de Cuenta</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Cropper modal -->
+    <div id="cropperModal" class="cropper-modal" style="display:none;">
+        <div class="cropper-container">
+            <img id="cropperImage" src="" alt="Recortar foto" />
+            <div class="cropper-controls">
+                <button id="cropperCancel" class="btn-secondary">Cancelar</button>
+                <button id="cropperApply" class="btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div class="modal" id="modalConfirmar" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Acción</h3>
+                <button class="modal-close" onclick="cerrarModal()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="modalMensaje"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                <button class="btn-primary" id="btnConfirmarModal">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cropper.js script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="../controllers/header-footer.js"></script>
+    <script src="../controllers/perfil.js"></script>
+
+</body>
+</html>
