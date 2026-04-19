@@ -1,5 +1,7 @@
 # DOCUMENTACIÓN COMPLETA - PRO STOCK TOOL
 
+![Pro Stock Tool Logo](public/icon/logo.png)
+
 **Pro-Stock-Tool** es un sistema web integral de gestión de inventarios y bodegas, desarrollado con PHP, JavaScript, MySQL y CSS. Está diseñado para ejecutarse en un entorno XAMPP (Apache + PHP + MySQL) con una clara separación entre la autenticación, lógica de negocio, acceso a datos y vistas del cliente.
 
 ---
@@ -11,6 +13,8 @@
 3. [Roles y Funciones](#roles-y-funciones)
 4. [Tablas de Base de Datos](#tablas-de-base-de-datos)
 5. [Arquitectura Técnica](#arquitectura-técnica)
+
+![Pro Stock Tool Interface](public/icon/readmen.png)
 
 ---
 
@@ -39,6 +43,10 @@ Pro-Stock-Tool es una plataforma web que permite a las empresas (especialmente f
 ✅ **Sistema de categorías y parámetros** personalizables
 ✅ **Búsqueda avanzada** de productos
 ✅ **Interfaz responsiva** para escritorio y mobile
+
+# 🕊️ En memoria de Luis Manuel Zedan - Compañero, amigo y hermano
+
+![Pro Stock Tool Landing](public/icon/landing.png)
 
 ---
 

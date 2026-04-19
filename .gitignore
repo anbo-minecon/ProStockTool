@@ -8,6 +8,7 @@
 .env.production
 .env.staging
 google4075d6e0c58dfa1b.html
+config.php
 
 # ── Archivos de sistema operativo ───────────────────────────────
 .DS_Store
